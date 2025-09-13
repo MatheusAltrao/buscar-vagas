@@ -1,5 +1,5 @@
-import { HeroSection } from "@/components/secoes/home/hero";
-import JobList from "@/components/secoes/job/job-list";
+import JobList from "@/app/(public)/(home)/[id]/components/job-list";
+import { HeroSection } from "@/app/(public)/(home)/components/hero";
 
 export default function Home() {
   return (

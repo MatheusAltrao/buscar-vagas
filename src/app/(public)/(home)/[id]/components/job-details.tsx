@@ -139,7 +139,7 @@ export function JobDetails({ job }: JobDetailsProps) {
         </div>
 
         <div className="lg:block hidden">
-          <Card className="   sticky top-8">
+          <Card className="sticky top-8">
             <CardHeader>
               <h3 className="text-xl font-bold text-foreground">Candidatar-se</h3>
             </CardHeader>

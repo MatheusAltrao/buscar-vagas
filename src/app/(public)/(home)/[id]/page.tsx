@@ -1,6 +1,6 @@
 import { getJobById } from "@/actions/jobs/get-job-by-id";
-import { JobDetails } from "@/components/secoes/job/job-details";
 import { notFound } from "next/navigation";
+import { JobDetails } from "./components/job-details";
 
 interface JobPageProps {
   params: {
