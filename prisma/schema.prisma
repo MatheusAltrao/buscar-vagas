@@ -17,6 +17,7 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+  applications  Application[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -78,7 +79,7 @@ model Authenticator {
 }
 
 model Job {
-  id                 Int      @id @default(autoincrement())
+  id                 Int           @id @default(autoincrement())
   title              String
   company            String
   location           String
@@ -90,7 +91,25 @@ model Job {
   tags               String[]
   companyDescription String
   companyLogo        String?
+  applications       Application[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Application {
+  id          Int     @id @default(autoincrement())
+  userId      String
+  jobId       Int
+  description String
+  projectLink String?
+  status      String  @default("PENDING") // PENDING, ACCEPTED, REJECTED
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job  Job  @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, jobId]) // Um usuário só pode se candidatar uma vez para cada vaga
 }
