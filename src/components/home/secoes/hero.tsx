@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MapPin, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -20,13 +20,6 @@ export function HeroSection() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
               <Input
                 placeholder="Cargo, palavra-chave ou empresa"
-                className="pl-10 h-12 border-0 focus-visible:ring-2 focus-visible:ring-accent"
-              />
-            </div>
-            <div className="flex-1 relative">
-              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-              <Input
-                placeholder="Cidade, estado ou remoto"
                 className="pl-10 h-12 border-0 focus-visible:ring-2 focus-visible:ring-accent"
               />
             </div>

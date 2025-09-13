@@ -1,0 +1,151 @@
+"use client";
+
+import Back from "@/components/ui/back";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Building, Calendar, MapPin } from "lucide-react";
+
+interface Job {
+  id: number;
+  title: string;
+  company: string;
+  location: string;
+  type: string;
+  salary: string;
+  postedAt: string;
+  description: string;
+  fullDescription: string;
+  tags: string[];
+  companyLogo: string;
+  companyDescription: string;
+}
+
+interface JobDetailsProps {
+  job: Job;
+}
+
+export function JobDetails({ job }: JobDetailsProps) {
+  return (
+    <div className="layout-area space-y-8">
+      <div className="space-y-4">
+        <Back />
+
+        <Card>
+          <CardHeader>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                  <div>
+                    <h1 className="text-3xl font-bold text-foreground mb-2">
+                      {job.title}
+                    </h1>
+                    <div className="flex items-center gap-2 text-muted-foreground mb-3">
+                      <Building size={20} />
+                      <span className="text-lg">{job.company}</span>
+                    </div>
+                    <p className="text-muted-foreground mb-4">{job.companyDescription}</p>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
+                      </svg>
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                        />
+                      </svg>
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {job.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <MapPin size={20} />
+                    <span>{job.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar size={20} />
+                    <span>{job.postedAt}</span>
+                  </div>
+                  <div>
+                    <span>Tipo do contrato: </span>
+                    <Badge variant="outline">{job.type}</Badge>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <div className="text-xl font-bold text-foreground">{job.salary}</div>
+                </div>
+              </div>
+            </div>
+          </CardHeader>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <Card>
+            <CardHeader>
+              <h2 className="text-2xl font-bold text-foreground">Descrição da Vaga</h2>
+            </CardHeader>
+            <CardContent>
+              <div
+                className="prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: job.fullDescription }}
+              />
+            </CardContent>
+          </Card>
+        </div>
+
+        <div>
+          <Card className="sticky top-8">
+            <CardHeader>
+              <h3 className="text-xl font-bold text-foreground">Candidatar-se</h3>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Interessado nesta vaga? Clique no botão abaixo para se candidatar.
+                </p>
+                <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+                  Candidatar-se Agora
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}
