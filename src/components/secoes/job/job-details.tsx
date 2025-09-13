@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Building, Calendar, MapPin } from "lucide-react";
+import { useState } from "react";
 
 interface Job {
   id: number;
@@ -25,6 +26,12 @@ interface JobDetailsProps {
 }
 
 export function JobDetails({ job }: JobDetailsProps) {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleToggleForm = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <div className="layout-area space-y-8">
       <div className="space-y-4">
@@ -124,7 +131,9 @@ export function JobDetails({ job }: JobDetailsProps) {
                 dangerouslySetInnerHTML={{ __html: job.fullDescription }}
               />
 
-              <Button className="w-full lg:hidden">Candidatar-se Agora</Button>
+              <Button onClick={handleToggleForm} className="w-full lg:hidden">
+                Candidatar-se Agora
+              </Button>
             </CardContent>
           </Card>
         </div>
@@ -139,7 +148,9 @@ export function JobDetails({ job }: JobDetailsProps) {
                 <p className="text-sm text-muted-foreground">
                   Interessado nesta vaga? Clique no botão abaixo para se candidatar.
                 </p>
-                <Button className="w-full">Candidatar-se Agora</Button>
+                <Button onClick={handleToggleForm} className="w-full">
+                  Candidatar-se Agora
+                </Button>
               </div>
             </CardContent>
           </Card>
