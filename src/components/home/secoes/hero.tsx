@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section className="bg-muted py-16 px-4 rounded-lg">
       <div className="container mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4 text-balance">
+        <h1 className="text-4xl md:text-5xl font-bold  mb-4 text-balance">
           Encontre Sua Próxima Oportunidade
         </h1>
         <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
@@ -23,8 +23,8 @@ export function HeroSection() {
                 className="pl-10 h-12 border-0 focus-visible:ring-2 focus-visible:ring-accent"
               />
             </div>
-            <Button className="h-12 px-8 bg-accent text-accent-foreground hover:bg-accent/90">
-              Buscar Vagas
+            <Button className="h-12 px-8">
+              <Search /> Buscar Vagas
             </Button>
           </div>
         </div>

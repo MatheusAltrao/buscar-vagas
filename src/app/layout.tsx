@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${inter.className} antialiased`}>
         <Header />
-        {children}
+        <div>{children}</div>
       </body>
     </html>
   );
