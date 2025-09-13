@@ -1,16 +1,19 @@
+"use client";
 import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "./button";
 
 export default function Back() {
+  const router = useRouter();
+
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
-    <div>
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-      >
-        <ChevronLeft size={20} />
-        Voltar para vagas
-      </Link>
-    </div>
+    <Button variant={"link"} onClick={handleBack}>
+      <ChevronLeft size={20} />
+      Voltar para vagas
+    </Button>
   );
 }

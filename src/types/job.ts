@@ -7,5 +7,7 @@ export interface JobProps {
   salary: string;
   postedAt: string;
   description: string;
+  fullDescription: string;
   tags: string[];
+  companyDescription: string;
 }

@@ -17,7 +17,6 @@ interface Job {
   description: string;
   fullDescription: string;
   tags: string[];
-  companyLogo: string;
   companyDescription: string;
 }
 

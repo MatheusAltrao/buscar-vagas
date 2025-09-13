@@ -1,4 +1,4 @@
-import Header from "@/components/home/secoes/header";
+import Header from "@/components/secoes/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";

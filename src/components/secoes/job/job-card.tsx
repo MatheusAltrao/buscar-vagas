@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { JobProps } from "@/types/job";
 import { Building2, Clock, MapPin } from "lucide-react";
+import Link from "next/link";
 
 interface JobCardProps {
   job: JobProps;
@@ -54,12 +55,16 @@ export default function JobCard({ job }: JobCardProps) {
               <span>{job.postedAt}</span>
             </div>
 
-            <div className="text-sm font-semibold text-primary">{job.salary}</div>
+            <div className="text-sm font-semibold text-primary">
+              <span>{job.salary}</span>
+            </div>
           </div>
         </div>
-        <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-          Ver Detalhes
-        </Button>
+        <Link href={`/${job.id}`}>
+          <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+            Ver Detalhes
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );
