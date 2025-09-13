@@ -3,7 +3,7 @@ export interface JobProps {
   title: string;
   company: string;
   location: string;
-  type: "CLT" | "PJ" | "Freelance";
+  type: string;
   salary: string;
   postedAt: string;
   description: string;
