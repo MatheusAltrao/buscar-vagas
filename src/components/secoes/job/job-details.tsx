@@ -118,17 +118,19 @@ export function JobDetails({ job }: JobDetailsProps) {
             <CardHeader>
               <h2 className="text-2xl font-bold text-foreground">Descrição da Vaga</h2>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div
                 className="prose prose-sm max-w-none"
                 dangerouslySetInnerHTML={{ __html: job.fullDescription }}
               />
+
+              <Button className="w-full lg:hidden">Candidatar-se Agora</Button>
             </CardContent>
           </Card>
         </div>
 
-        <div>
-          <Card className="sticky top-8">
+        <div className="lg:block hidden">
+          <Card className="   sticky top-8">
             <CardHeader>
               <h3 className="text-xl font-bold text-foreground">Candidatar-se</h3>
             </CardHeader>
@@ -137,9 +139,7 @@ export function JobDetails({ job }: JobDetailsProps) {
                 <p className="text-sm text-muted-foreground">
                   Interessado nesta vaga? Clique no botão abaixo para se candidatar.
                 </p>
-                <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-                  Candidatar-se Agora
-                </Button>
+                <Button className="w-full">Candidatar-se Agora</Button>
               </div>
             </CardContent>
           </Card>
