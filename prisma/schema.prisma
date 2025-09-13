@@ -76,3 +76,21 @@ model Authenticator {
 
   @@id([userId, credentialID])
 }
+
+model Job {
+  id                 Int      @id @default(autoincrement())
+  title              String
+  company            String
+  location           String
+  type               String
+  salary             String
+  postedAt           String
+  description        String
+  fullDescription    String
+  tags               String[]
+  companyDescription String
+  companyLogo        String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

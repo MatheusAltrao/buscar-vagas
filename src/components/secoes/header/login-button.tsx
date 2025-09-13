@@ -1,20 +1,12 @@
+import { handleSignIn } from "@/actions/login/sign-in";
+import { handleSignOut } from "@/actions/login/sign-out";
 import { Button } from "@/components/ui/button";
-import { auth, signIn, signOut } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { DoorOpen } from "lucide-react";
 
 export default async function LoginButton() {
   const session = await auth();
   const hasAuthenticated = !!session?.user;
-
-  async function handleSignIn() {
-    "use server";
-    await signIn("github");
-  }
-
-  async function handleSignOut() {
-    "use server";
-    await signOut();
-  }
 
   return (
     <div>
