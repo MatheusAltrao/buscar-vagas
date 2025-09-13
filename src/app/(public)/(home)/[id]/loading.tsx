@@ -1,11 +1,5 @@
-import Loading from "@/components/ui/loading";
+import PageLoading from "@/components/ui/page-loading";
 
 export default function JobLoading() {
-  return (
-    <div className="h-screen bg-background pt-[15vh] ">
-      <div className=" flex  justify-center">
-        <Loading size={28} />
-      </div>
-    </div>
-  );
+  return <PageLoading />;
 }
