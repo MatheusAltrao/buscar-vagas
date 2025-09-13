@@ -11,7 +11,7 @@ export default function Back() {
   };
 
   return (
-    <Button variant={"link"} onClick={handleBack}>
+    <Button className="p-0" variant={"link"} onClick={handleBack}>
       <ChevronLeft size={20} />
       Voltar para vagas
     </Button>
