@@ -7,7 +7,6 @@ import Link from "next/link";
 
 export default async function JobListUser() {
   const applications = await getUserApplications();
-  console.log(applications);
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto">

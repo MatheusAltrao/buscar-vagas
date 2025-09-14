@@ -1,4 +1,4 @@
-import { HeroSection } from "@/app/(public)/(home)/components/hero";
+import { HeroSection } from "@/components/ui/hero";
 import JobListUser from "./components/job-list-user";
 
 export default function MyApplicationsPage() {
