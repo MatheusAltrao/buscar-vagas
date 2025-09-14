@@ -1,8 +1,12 @@
 import { getAllJobs } from "@/actions/jobs/get-all-jobs";
 import JobCard from "./job-card";
 
-export default async function JobList() {
-  const jobs = await getAllJobs();
+interface JobListProps {
+  search?: string;
+}
+
+export default async function JobList({ search }: JobListProps) {
+  const jobs = await getAllJobs(search);
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto">
