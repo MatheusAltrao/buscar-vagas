@@ -98,12 +98,12 @@ model Job {
 }
 
 model Application {
-  id          Int     @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   userId      String
   jobId       Int
   description String
-  projectLink String?
-  status      String  @default("PENDING") // PENDING, ACCEPTED, REJECTED
+  githubLink  String
+  status      String @default("PENDING") // PENDING, ACCEPTED, REJECTED
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   job  Job  @relation(fields: [jobId], references: [id], onDelete: Cascade)

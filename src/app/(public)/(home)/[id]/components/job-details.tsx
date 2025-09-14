@@ -3,26 +3,20 @@
 import Back from "@/components/ui/back";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { JobProps } from "@/schemas/job.schema";
 import { Building, Calendar, MapPin } from "lucide-react";
 import { useState } from "react";
-
-interface Job {
-  id: number;
-  title: string;
-  company: string;
-  location: string;
-  type: string;
-  salary: string;
-  postedAt: string;
-  description: string;
-  fullDescription: string;
-  tags: string[];
-  companyDescription: string;
-}
+import ApplicationForm from "./application-form";
 
 interface JobDetailsProps {
-  job: Job;
+  job: JobProps;
 }
 
 export function JobDetails({ job }: JobDetailsProps) {
@@ -141,16 +135,20 @@ export function JobDetails({ job }: JobDetailsProps) {
         <div className="lg:block hidden">
           <Card className="sticky top-8">
             <CardHeader>
-              <h3 className="text-xl font-bold text-foreground">Candidatar-se</h3>
+              <CardTitle>Candidatar-se</CardTitle>
+              <CardDescription>
+                Interessado nesta vaga? Clique no botão abaixo para se candidatar.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  Interessado nesta vaga? Clique no botão abaixo para se candidatar.
-                </p>
-                <Button onClick={handleToggleForm} className="w-full">
-                  Candidatar-se Agora
-                </Button>
+                {!showForm && (
+                  <Button onClick={handleToggleForm} className="w-full">
+                    Candidatar-se Agora
+                  </Button>
+                )}
+
+                {showForm && <ApplicationForm setShowForm={setShowForm} jobId={job.id} />}
               </div>
             </CardContent>
           </Card>

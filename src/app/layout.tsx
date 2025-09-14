@@ -1,6 +1,7 @@
 import Header from "@/components/header/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${inter.className} antialiased`}>
+        <Toaster />
         <Header />
         <div>{children}</div>
       </body>

@@ -1,0 +1,108 @@
+"use client";
+
+import { createApplication } from "@/actions/applications/create-application";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { ApplicationSchema, IApplicationSchema } from "@/schemas/application.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+
+interface ApplicationFormProps {
+  setShowForm: (show: boolean) => void;
+  jobId: number;
+}
+
+export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormProps) {
+  const form = useForm<IApplicationSchema>({
+    resolver: zodResolver(ApplicationSchema),
+    defaultValues: {
+      description: "",
+      githubLink: "",
+    },
+  });
+
+  async function onSubmit(values: IApplicationSchema) {
+    const applicationData = {
+      jobId: jobId,
+      description: values.description,
+      githubLink: values.githubLink,
+    };
+
+    try {
+      await createApplication(applicationData);
+      toast.success("Candidatura enviada com sucesso!");
+    } catch (error) {
+      toast.error("Erro ao enviar candidatura. Tente novamente.");
+      console.error("Erro ao enviar candidatura:", error);
+    }
+  }
+
+  function handleCancel() {
+    setShowForm(false);
+    form.reset();
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <div className="space-y-2">
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Descrição</FormLabel>
+                <FormControl>
+                  <Textarea
+                    className="max-h-[500px] min-h-[150px]"
+                    placeholder="Descrição"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="githubLink"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Link do github</FormLabel>
+                <FormControl>
+                  <Input placeholder="https://github.com/seu-projeto" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="space-y-2">
+          <Button className="w-full" type="submit">
+            Candidatar-se
+          </Button>
+
+          <Button
+            onClick={handleCancel}
+            className="w-full"
+            type="button"
+            variant="secondary"
+          >
+            Cancelar
+          </Button>
+        </div>
+      </form>
+    </Form>
+  );
+}
