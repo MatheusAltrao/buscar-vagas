@@ -15,7 +15,7 @@ import { JobProps } from "@/schemas/job.schema";
 import { Building, Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import ApplicationForm from "./application-form";
+import SendApplication from "./send-application";
 
 interface JobDetailsProps {
   job: JobProps;
@@ -133,9 +133,15 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
                 dangerouslySetInnerHTML={{ __html: job.fullDescription }}
               />
 
-              <Button onClick={handleToggleForm} className="w-full lg:hidden">
-                Enviar
-              </Button>
+              <div className="lg:hidden">
+                <SendApplication
+                  handleToggleForm={handleToggleForm}
+                  isAuthtenticated={isAuthtenticated}
+                  jobId={job.id}
+                  setShowForm={setShowForm}
+                  showForm={showForm}
+                />
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -150,22 +156,13 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {!isAuthtenticated && (
-                    <form action={handleSignIn}>
-                      <Button className="w-full">Enviar</Button>
-                    </form>
-                  )}
-                  {!showForm && isAuthtenticated && (
-                    <Button onClick={handleToggleForm} className="w-full">
-                      Enviar
-                    </Button>
-                  )}
-
-                  {showForm && (
-                    <ApplicationForm setShowForm={setShowForm} jobId={job.id} />
-                  )}
-                </div>
+                <SendApplication
+                  handleToggleForm={handleToggleForm}
+                  isAuthtenticated={isAuthtenticated}
+                  jobId={job.id}
+                  setShowForm={setShowForm}
+                  showForm={showForm}
+                />
               </CardContent>
             </Card>
           </div>
