@@ -34,7 +34,7 @@ export async function createApplication(data: CreateApplicationProps) {
       },
     });
 
-    console.log("Candidatura criada com sucesso:", application);
+    return application;
   } catch (error) {
     throw new Error("Erro ao criar candidatura: " + error);
   }
