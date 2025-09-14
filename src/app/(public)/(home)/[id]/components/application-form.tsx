@@ -11,9 +11,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import Loading from "@/components/ui/loading";
 import { Textarea } from "@/components/ui/textarea";
 import { ApplicationSchema, IApplicationSchema } from "@/schemas/application.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -23,6 +25,8 @@ interface ApplicationFormProps {
 }
 
 export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormProps) {
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<IApplicationSchema>({
     resolver: zodResolver(ApplicationSchema),
     defaultValues: {
@@ -38,13 +42,15 @@ export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormP
       githubLink: values.githubLink,
     };
 
-    try {
-      await createApplication(applicationData);
-      toast.success("Candidatura enviada com sucesso!");
-    } catch (error) {
-      toast.error("Erro ao enviar candidatura. Tente novamente.");
-      console.error("Erro ao enviar candidatura:", error);
-    }
+    startTransition(async () => {
+      try {
+        await createApplication(applicationData);
+        toast.success("Candidatura enviada com sucesso!");
+      } catch (error) {
+        toast.error("Erro ao enviar candidatura. Tente novamente.");
+        console.error("Erro ao enviar candidatura:", error);
+      }
+    });
   }
 
   function handleCancel() {
@@ -89,11 +95,12 @@ export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormP
           />
         </div>
         <div className="space-y-2">
-          <Button className="w-full" type="submit">
-            Candidatar-se
+          <Button disabled={isPending} className="w-full" type="submit">
+            {isPending && <Loading />} Candidatar-se
           </Button>
 
           <Button
+            disabled={isPending}
             onClick={handleCancel}
             className="w-full"
             type="button"
