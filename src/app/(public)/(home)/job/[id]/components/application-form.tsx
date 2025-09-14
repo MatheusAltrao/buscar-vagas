@@ -51,7 +51,7 @@ export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormP
         router.refresh();
       } catch (error) {
         toast.error("Erro ao enviar candidatura. Tente novamente.");
-        console.error("Erro ao enviar candidatura:", error);
+        console.error("Error submitting application:", error);
       }
     });
   }
