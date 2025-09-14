@@ -2,16 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  title: string;
+  description: string;
+}
+export function HeroSection({ title, description }: HeroSectionProps) {
   return (
     <section className="bg-muted py-16 px-4 rounded-lg">
       <div className="container mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold  mb-4 text-balance">
-          Encontre Sua Próxima Oportunidade
-        </h1>
+        <h1 className="text-4xl md:text-5xl font-bold  mb-4 text-balance">{title}</h1>
         <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-          Descubra milhares de vagas de emprego das melhores empresas. Sua carreira dos
-          sonhos está a um clique de distância.
+          {description}
         </p>
 
         <div className="max-w-4xl mx-auto">
