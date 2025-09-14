@@ -60,7 +60,7 @@ export default function JobCard({ job }: JobCardProps) {
             </div>
           </div>
         </div>
-        <Link href={`/${job.id}`}>
+        <Link href={`/job/${job.id}`}>
           <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
             Ver Detalhes
           </Button>

@@ -1,5 +1,6 @@
 "use client";
 
+import { handleSignInRedirecToApplication } from "@/actions/login/sign-in";
 import Back from "@/components/ui/back";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,18 +13,25 @@ import {
 } from "@/components/ui/card";
 import { JobProps } from "@/schemas/job.schema";
 import { Building, Calendar, MapPin } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import ApplicationForm from "./application-form";
 
 interface JobDetailsProps {
   job: JobProps;
+  isAuthtenticated: boolean;
+  alreadyApplied: boolean;
 }
 
-export function JobDetails({ job }: JobDetailsProps) {
+export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetailsProps) {
   const [showForm, setShowForm] = useState(false);
 
   const handleToggleForm = () => {
     setShowForm(!showForm);
+  };
+
+  const handleSignIn = async () => {
+    handleSignInRedirecToApplication(job.id);
   };
 
   return (
@@ -126,33 +134,60 @@ export function JobDetails({ job }: JobDetailsProps) {
               />
 
               <Button onClick={handleToggleForm} className="w-full lg:hidden">
-                Candidatar-se Agora
+                Enviar
               </Button>
             </CardContent>
           </Card>
         </div>
 
-        <div className="lg:block hidden">
-          <Card className="sticky top-8">
-            <CardHeader>
-              <CardTitle>Candidatar-se</CardTitle>
-              <CardDescription>
-                Interessado nesta vaga? Clique no botão abaixo para se candidatar.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {!showForm && (
-                  <Button onClick={handleToggleForm} className="w-full">
-                    Candidatar-se Agora
-                  </Button>
-                )}
+        {!alreadyApplied && (
+          <div className="lg:block hidden">
+            <Card className="sticky top-8">
+              <CardHeader>
+                <CardTitle>Enviar desafio</CardTitle>
+                <CardDescription>
+                  Envie seu desafio para a vaga e aguarde o contato da empresa.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {!isAuthtenticated && (
+                    <form action={handleSignIn}>
+                      <Button className="w-full">Enviar</Button>
+                    </form>
+                  )}
+                  {!showForm && isAuthtenticated && (
+                    <Button onClick={handleToggleForm} className="w-full">
+                      Enviar
+                    </Button>
+                  )}
 
-                {showForm && <ApplicationForm setShowForm={setShowForm} jobId={job.id} />}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+                  {showForm && (
+                    <ApplicationForm setShowForm={setShowForm} jobId={job.id} />
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {alreadyApplied && (
+          <div className="lg:block hidden">
+            <Card className="sticky top-8 bg-primary/10 border-primary">
+              <CardHeader>
+                <CardTitle>Candidatura enviada!</CardTitle>
+                <CardDescription>
+                  Aguarde o contato da empresa. Você pode acompanhar todas as suas
+                  candidaturas clicando{" "}
+                  <Link className="underline text-primary" href={"/minhas-candidaturas"}>
+                    aqui
+                  </Link>
+                  .
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );

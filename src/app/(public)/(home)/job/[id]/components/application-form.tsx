@@ -15,6 +15,7 @@ import Loading from "@/components/ui/loading";
 import { Textarea } from "@/components/ui/textarea";
 import { ApplicationSchema, IApplicationSchema } from "@/schemas/application.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -26,6 +27,7 @@ interface ApplicationFormProps {
 
 export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormProps) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<IApplicationSchema>({
     resolver: zodResolver(ApplicationSchema),
@@ -46,6 +48,7 @@ export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormP
       try {
         await createApplication(applicationData);
         toast.success("Candidatura enviada com sucesso!");
+        router.refresh();
       } catch (error) {
         toast.error("Erro ao enviar candidatura. Tente novamente.");
         console.error("Erro ao enviar candidatura:", error);
@@ -67,7 +70,7 @@ export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormP
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descrição</FormLabel>
+                <FormLabel>Observações</FormLabel>
                 <FormControl>
                   <Textarea
                     className="max-h-[500px] min-h-[150px]"
@@ -85,7 +88,7 @@ export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormP
             name="githubLink"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Link do github</FormLabel>
+                <FormLabel>Link do projeto no github</FormLabel>
                 <FormControl>
                   <Input placeholder="https://github.com/seu-projeto" {...field} />
                 </FormControl>
@@ -96,7 +99,7 @@ export default function ApplicationForm({ setShowForm, jobId }: ApplicationFormP
         </div>
         <div className="space-y-2">
           <Button disabled={isPending} className="w-full" type="submit">
-            {isPending && <Loading />} Candidatar-se
+            {isPending && <Loading />} Enviar
           </Button>
 
           <Button
