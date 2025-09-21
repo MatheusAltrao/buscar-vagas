@@ -26,7 +26,7 @@ export default async function LoginButton() {
 
       {hasAuthenticated && (
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger asChild>
             <Button variant="outline" size={"sm"}>
               {session?.user?.name}
             </Button>
