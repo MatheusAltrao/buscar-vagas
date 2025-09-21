@@ -1,8 +1,13 @@
 import { handleSignIn } from "@/actions/login/sign-in";
 import { handleSignOut } from "@/actions/login/sign-out";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { auth } from "@/lib/auth";
-import { DoorOpen } from "lucide-react";
+import { DoorClosed, DoorOpen } from "lucide-react";
 import Link from "next/link";
 
 export default async function LoginButton() {
@@ -20,16 +25,25 @@ export default async function LoginButton() {
       )}
 
       {hasAuthenticated && (
-        <div className="flex items-center gap-2">
-          <Link className="text-sm underline" href="/my-applications">
-            Minhas candidaturas
-          </Link>
-          <form action={handleSignOut}>
-            <Button variant="secondary" size={"sm"}>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button variant="outline" size={"sm"}>
               {session?.user?.name}
             </Button>
-          </form>
-        </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="space-y-2 p-3 w-48">
+            <Link className="text-sm underline" href="/my-applications">
+              <Button className="w-full" variant={"outline"} size={"sm"}>
+                Minhas candidaturas
+              </Button>
+            </Link>
+            <form className="w-full" action={handleSignOut}>
+              <Button className="w-full" variant="destructive" size={"sm"}>
+                <DoorClosed /> Sair
+              </Button>
+            </form>
+          </DropdownMenuContent>
+        </DropdownMenu>
       )}
     </div>
   );
