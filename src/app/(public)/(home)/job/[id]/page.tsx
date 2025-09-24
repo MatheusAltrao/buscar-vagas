@@ -19,8 +19,12 @@ export default async function JobPage({ params }: JobPageProps) {
     notFound();
   }
 
-  const isAuthtenticated = !!session?.user;
-  const alreadyApplied = await registeredApplication(paramsId, session?.user?.id!);
+  const sesssionUser = session?.user || null;
+  const isAuthtenticated = !!sesssionUser;
+
+  const alreadyApplied = sesssionUser?.id
+    ? await registeredApplication(paramsId, sesssionUser.id)
+    : false;
 
   return (
     <div className="min-h-screen py-5">
