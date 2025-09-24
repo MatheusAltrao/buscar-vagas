@@ -154,7 +154,7 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
                 <CardDescription>
                   Aguarde o contato da empresa. Você pode acompanhar todas as suas
                   candidaturas clicando{" "}
-                  <Link className="underline text-primary" href={"/minhas-candidaturas"}>
+                  <Link className="underline text-primary" href={"/my-applications"}>
                     aqui
                   </Link>
                   .
@@ -178,7 +178,7 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
                   todas as suas candidaturas clicando{" "}
                   <Link
                     className="underline text-primary font-semibold"
-                    href={"/minhas-candidaturas"}
+                    href={"/my-applications"}
                   >
                     aqui
                   </Link>
