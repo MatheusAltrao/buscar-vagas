@@ -1,7 +1,14 @@
 import { HeroSection } from "@/components/ui/hero";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import JobListUser from "./components/job-list-user";
 
-export default function MyApplicationsPage() {
+export default async function MyApplicationsPage() {
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect("/");
+  }
   return (
     <div className="min-h-screen layout-area pt-5 ">
       <HeroSection

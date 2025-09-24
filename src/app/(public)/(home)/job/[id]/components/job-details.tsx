@@ -1,6 +1,5 @@
 "use client";
 
-import { handleSignInRedirecToApplication } from "@/actions/login/sign-in";
 import Back from "@/components/ui/back";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -39,10 +38,6 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
 
   const handleToggleForm = () => {
     setShowForm(!showForm);
-  };
-
-  const handleSignIn = async () => {
-    handleSignInRedirecToApplication(job.id);
   };
 
   return (
@@ -173,9 +168,8 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
                   <CardTitle className="text-red-700">Candidatura recusada</CardTitle>
                 </div>
                 <CardDescription className="text-red-700">
-                  Infelizmente, sua candidatura para esta vaga foi recusada. Não desanime!
-                  Continue se candidatando a outras oportunidades. Você pode acompanhar
-                  todas as suas candidaturas clicando{" "}
+                  Infelizmente, sua candidatura para esta vaga foi recusada. Você pode
+                  acompanhar todas as suas candidaturas clicando{" "}
                   <Link
                     className="underline text-primary font-semibold"
                     href={"/my-applications"}
