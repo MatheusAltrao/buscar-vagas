@@ -50,7 +50,7 @@ export function HeroSection({ title, description, search }: HeroSectionProps) {
                 <Input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Cargo, palavra-chave ou empresa"
+                  placeholder="Cargo, palavra-chave ou tecnologia"
                   className="pl-10 h-12  focus-visible:ring-2 focus-visible:ring-primary"
                 />
               </div>
