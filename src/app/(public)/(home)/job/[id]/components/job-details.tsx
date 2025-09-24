@@ -19,7 +19,19 @@ import SendApplication from "./send-application";
 interface JobDetailsProps {
   job: JobProps;
   isAuthtenticated: boolean;
-  alreadyApplied: boolean;
+  alreadyApplied:
+    | false
+    | {
+        id: number;
+        jobId: number;
+        createdAt: Date;
+        updatedAt: Date;
+        userId: string;
+        description: string;
+        githubLink: string;
+        status: string;
+      }
+    | null;
 }
 
 export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetailsProps) {
@@ -134,7 +146,7 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
           </div>
         )}
 
-        {alreadyApplied && (
+        {alreadyApplied && alreadyApplied.status === "PENDING" && (
           <div className="lg:block hidden">
             <Card className="sticky top-8 bg-primary/10 border-primary">
               <CardHeader>
@@ -143,6 +155,31 @@ export function JobDetails({ job, isAuthtenticated, alreadyApplied }: JobDetails
                   Aguarde o contato da empresa. Você pode acompanhar todas as suas
                   candidaturas clicando{" "}
                   <Link className="underline text-primary" href={"/minhas-candidaturas"}>
+                    aqui
+                  </Link>
+                  .
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        )}
+
+        {alreadyApplied && alreadyApplied.status === "REJECTED" && (
+          <div className="lg:block hidden">
+            <Card className="sticky top-8 border-red-500 bg-red-50 shadow-lg">
+              <CardHeader className="flex flex-col items-start gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="inline-block w-3 h-3 rounded-full bg-red-500" />
+                  <CardTitle className="text-red-700">Candidatura recusada</CardTitle>
+                </div>
+                <CardDescription className="text-red-700">
+                  Infelizmente, sua candidatura para esta vaga foi recusada. Não desanime!
+                  Continue se candidatando a outras oportunidades. Você pode acompanhar
+                  todas as suas candidaturas clicando{" "}
+                  <Link
+                    className="underline text-primary font-semibold"
+                    href={"/minhas-candidaturas"}
+                  >
                     aqui
                   </Link>
                   .

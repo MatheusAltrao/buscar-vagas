@@ -16,7 +16,7 @@ export async function registeredApplication(jobId: number, userId: string) {
       },
     });
 
-    return !!applicationAlreadyRegistered;
+    return applicationAlreadyRegistered;
   } catch (error) {
     console.error("Error checking registered application:", error);
     return false;
